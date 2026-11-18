@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>TSB ORDER | 탭샵바 발주 단가 확인</title>
+<style>
+:root{--blue:#156DFF;--ink:#0E0E0E;--bg:#F4F5F7;--line:#E6E8EC;--mute:#6B7280;--ok:#12A150;--bad:#E5484D;--chg:#F2F7FF}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:15px;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:18px 14px 150px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 2px 14px}
+.brand{display:flex;align-items:center;gap:10px}
+.dots{display:flex;gap:5px}.dots i{width:9px;height:9px;border-radius:50%;display:block}
+.lab{letter-spacing:.24em;font-size:11px;font-weight:800;color:var(--mute)}
+.logo{font-weight:900;letter-spacing:.06em;font-size:13px}
+.card{background:#fff;border-radius:18px;padding:18px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+h1{font-size:22px;letter-spacing:-.03em;margin:0 0 4px}
+.sub{color:var(--mute);font-size:13.5px;line-height:1.6}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--mute);margin-top:10px;font-weight:600}
+.meta b{color:var(--ink)}
+.how{margin:12px 0 0;padding:0;list-style:none;font-size:13.5px;line-height:1.65;color:#374151}
+.how li{padding-left:18px;position:relative}.how li:before{content:"";position:absolute;left:4px;top:.7em;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+.store{display:flex;justify-content:space-between;align-items:baseline;margin:2px 0 6px}
+.store h2{font-size:17px;margin:0;letter-spacing:-.02em}
+.store span{font-size:12.5px;color:var(--mute);font-weight:700}
+.ln{border-top:1px solid #F1F2F4;padding:13px 0}
+.ln:first-of-type{border-top:0}
+.ln.chg{background:var(--chg);margin:0 -16px;padding:13px 16px;border-radius:12px;border-top-color:transparent}
+.ln.so{opacity:.62}
+.nm{font-weight:800;font-size:15px;line-height:1.35;letter-spacing:-.01em}
+.ours{font-size:12.5px;color:var(--mute);margin-top:2px;font-weight:600}
+.grid{display:grid;grid-template-columns:1fr 112px;gap:10px;margin-top:10px;align-items:end}
+.f label{display:block;font-size:11.5px;color:var(--mute);font-weight:700;margin-bottom:4px}
+.in{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;font-size:17px;font-weight:700;background:#fff;outline:none;text-align:right;-webkit-appearance:none;appearance:none}
+.in:focus{border-color:var(--blue)}
+.in.t{text-align:left;font-size:15px;font-weight:600}
+.in:disabled{background:#F7F8FA;color:#4B5563}
+.qty{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.qty button{width:34px;height:46px;border:0;background:#F7F8FA;font-size:19px;font-weight:700;cursor:pointer}
+.qty input{width:100%;border:0;text-align:center;font-size:17px;font-weight:700;outline:none;min-width:0;background:transparent;-webkit-appearance:none;appearance:none}
+.qty.dis{opacity:.6}
+.row2{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:9px;flex-wrap:wrap}
+.chk{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;cursor:pointer;user-select:none}
+.chk input{width:20px;height:20px;accent-color:var(--blue);margin:0}
+.diff{font-size:12.5px;font-weight:800}.diff.up{color:var(--bad)}.diff.dn{color:var(--blue)}
+.amt{font-size:13px;font-weight:700;color:#374151}
+.alt{margin-top:9px}
+.tot{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 14px calc(12px + env(safe-area-inset-bottom,0px));z-index:10}
+.tot .in2{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.tot .nums{flex:1;font-size:12.5px;color:var(--mute);font-weight:700;line-height:1.5}
+.tot .nums b{display:block;color:var(--ink);font-size:19px;letter-spacing:-.02em}
+.btn{border:0;border-radius:14px;min-height:50px;padding:0 22px;font-weight:800;font-size:16px;cursor:pointer;background:#EEF0F3;color:var(--ink)}
+.btn.p{background:var(--blue);color:#fff}
+.btn.sm{min-height:38px;font-size:13.5px;padding:0 14px;border-radius:11px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+table.sum{width:100%;border-collapse:collapse;font-size:15px}
+table.sum td{padding:8px 0;border-bottom:1px solid #F1F2F4;font-weight:600}
+table.sum td:last-child{text-align:right}
+table.sum tr.t td{font-weight:800;font-size:17px;border-bottom:0}
+.msg{text-align:center;padding:34px 20px}
+.msg h1{font-size:21px;margin-top:6px}
+.msg .badge{display:inline-block;margin-top:16px;background:#EAF1FF;color:var(--blue);font-weight:800;font-size:13px;border-radius:999px;padding:8px 14px}
+.done{display:inline-flex;align-items:center;gap:8px;background:#EAF7EF;color:var(--ok);font-weight:800;font-size:13px;border-radius:999px;padding:6px 12px;margin-bottom:8px}
+.chgl{font-size:13.5px;line-height:1.7}
+.chgl div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #F1F2F4;padding:6px 0}
+.mute{color:var(--mute)}
+.sk{height:16px;border-radius:8px;background:#EEF0F3;margin:8px 0}
+.foot{text-align:center;color:var(--mute);font-size:12px;margin-top:18px;line-height:1.7}
+.mask{position:fixed;inset:0;background:rgba(14,14,14,.45);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:#fff;width:100%;max-width:560px;border-radius:20px 20px 0 0;padding:20px 16px calc(18px + env(safe-area-inset-bottom,0px));max-height:88vh;overflow:auto}
+@media(min-width:700px){.mask{align-items:center}.sheet{border-radius:20px}.grid{grid-template-columns:1fr 140px}}
+.ptable{display:none}
+@media print{
+ body{background:#fff;font-size:12px}.wrap{padding:0;max-width:none}
+ .tot,.tools,.how,.noprint,.lnlist{display:none!important}
+ .card{box-shadow:none;border:0;padding:0 0 10px;margin:0}
+ .ptable{display:table;width:100%;border-collapse:collapse;font-size:11.5px;margin-top:8px}
+ .ptable th,.ptable td{border:1px solid #999;padding:4px 6px}
+ .ptable td.n{text-align:right}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+ <div class="top"><div class="brand"><span class="dots"><i style="background:#F43131"></i><i style="background:#156DFF"></i><i style="background:#FFC100"></i></span><span class="lab">TSB ORDER</span></div><span class="logo">TAP SHOP BAR</span></div>
+ <div class="card"><div class="sk" style="width:50%"></div><div class="sk"></div><div class="sk" style="width:70%"></div></div>
+</div>
+<div id="tot"></div>
+<script>
+(function(){
+var API='https://script.google.com/macros/s/AKfycbzQac5fduY9sPhRXr9-nrvq0jV2ghsrJhug7b6DnSoLVPbv5V8Ays2eGZRPr202BtH8cQ/exec';
+var CONTACT='hello@tsb.wine';
+var app=document.getElementById('app'),totEl=document.getElementById('tot');
+var TOP=app.querySelector('.top').outerHTML;
+function E(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function N(v){if(v==null||v==='')return null;var n=Number(String(v).replace(/[^\d.-]/g,''));return isNaN(n)?null:n}
+function W(n){return n==null||isNaN(n)?'-':Math.round(n).toLocaleString('ko-KR')}
+function D(s){if(!s)return'';var m=String(s).match(/(\d{4})-(\d{2})-(\d{2})/);if(!m)return E(s);var d=new Date(+m[1],+m[2]-1,+m[3]);return (+m[2])+'월 '+(+m[3])+'일 ('+'일월화수목금토'[d.getDay()]+')'}
+var h=decodeURIComponent((location.hash||'').replace(/^#\/?/,''));var dot=h.lastIndexOf('.');
+var VPO=dot>0?h.slice(0,dot):'',TK=dot>0?h.slice(dot+1):'';
+var S={d:null,ed:{},ship:'',memo:'',locked:false};
+function post(action,data){
+ if(window.V_MOCK)return window.V_MOCK(action,data);
+ var body=Object.assign({action:action},data);
+ return fetch(API,{method:'POST',credentials:'omit',cache:'no-store',redirect:'follow',body:JSON.stringify(body)}).then(function(r){return r.text()}).then(function(t){var j;try{j=JSON.parse(t)}catch(e){throw new Error('응답을 읽지 못했어요')}if(!j.ok){var er=new Error(j.message||j.error||'오류');er.code=j.error||'';er.j=j;throw er}return j})}
+function page(inner){app.innerHTML=TOP+inner}
+function msg(title,body,badge){totEl.innerHTML='';page('<div class="card msg"><h1>'+title+'</h1><p class="sub">'+body+'</p>'+(badge?'<div class="badge">'+badge+'</div>':'')+'</div><div class="foot">문의: 탭샵바 서포트센터 '+CONTACT+'</div>')}
+function bad(){msg('링크를 확인할 수 없어요','주소가 잘렸거나 바뀐 것 같아요. 받으신 링크 전체를 다시 눌러 주세요.<br>그래도 안 되면 탭샵바 서포트센터에 새 링크를 요청해 주세요.')}
+function expired(){msg('링크 기간이 끝났어요','이 단가 확인 링크는 열 수 있는 기간이 지났어요.<br>탭샵바 서포트센터에 새 링크를 요청해 주시면 바로 보내 드릴게요.','기간 만료')}
+function load(){
+ if(!VPO||!TK)return bad();
+ post('vendor.get',{vpoId:VPO,t:TK}).then(function(j){S.d=norm(j);
+  if(/취소/.test(S.d.status))return msg('취소된 발주예요','이 단가 확인 요청은 탭샵바에서 취소했어요. 따로 하실 일은 없어요.','취소됨');
+  if(S.d.submitted){S.locked=true;if(S.d.hasSub)return done(true);return msg('이미 제출된 링크예요','이 발주는 제출이 끝났어요. 고칠 내용이 있으면 탭샵바 서포트센터로 연락해 주세요.','제출 완료')}
+  if(S.d.expired)return expired();
+  S.ed={};S.d.lines.forEach(function(l){S.ed[l.lineId]={price:l.our,qty:l.qty,soldOut:false,alt:'',memo:''}});
+  draw()}).catch(function(e){var c=String(e.code||'')+' '+String(e.message||'');
+  if(/EXPIRE|만료/i.test(c))return expired();
+  if(/USED|SUBMITTED|LOCK|제출/i.test(c)&&e.j&&e.j.lines&&e.j.submitted){S.d=norm(e.j);S.locked=true;return done(true)}
+  if(/USED|SUBMITTED|LOCK|제출/i.test(c))return msg('이미 제출된 링크예요','이 발주는 제출이 끝났어요. 고칠 내용이 있으면 탭샵바 서포트센터로 연락해 주세요.','제출 완료');
+  if(/LINK|TOKEN|INVALID|NOT_FOUND|AUTH|없|잘못/i.test(c))return bad();
+  msg('잠시 연결이 안 돼요','네트워크가 불안정해요. 잠시 뒤 새로고침해 주세요.<br><button class="btn sm" style="margin-top:14px" onclick="location.reload()">다시 시도</button>')})}
+function norm(j){var v=j.vpo||j;var sub=(j.submitted&&typeof j.submitted==='object')?j.submitted:null;
+ if(!sub&&(j.submitted===true||j.readOnly===true)&&(j.lines||[]).some(function(l){return l.reply})){sub={lines:(j.lines||[]).filter(function(l){return l.reply}).map(function(l){return Object.assign({lineId:l.lineId},l.reply)}),shipDate:j.shipDate||'',memo:j.memo||''}}
+ var lines=(j.lines||v.lines||[]).map(function(l){return {lineId:l.lineId,name:l.name,store:l.store||'',qty:N(l.qty)||0,our:N(l.ourPrice!=null?l.ourPrice:l.price)}});
+ var exp=v.expires||j.expires||'';var st=String(j.status||v.status||'');
+ var isSub=!!sub||j.submitted===true||/회신|제출|확정|입금|출고|완료|취소/.test(st)||(j.readOnly===true&&j.expired!==true);
+ var expired=j.expired===true||/만료/.test(st)||(!isSub&&exp&&new Date(String(exp).replace(' ','T')+(/[Z+]/.test(exp)?'':'+09:00')).getTime()<Date.now());
+ if(sub){var sl={};(sub.lines||[]).forEach(function(x){sl[x.lineId]=x});lines.forEach(function(l){var x=sl[l.lineId];S.ed[l.lineId]=x?{price:N(x.price),qty:N(x.qty),soldOut:!!x.soldOut,alt:x.alt||'',memo:x.memo||''}:{price:l.our,qty:l.qty,soldOut:false,alt:'',memo:''}});S.ship=sub.shipDate||'';S.memo=sub.memo||''}
+ return {hasSub:!!sub,vpoId:v.vpoId||VPO,supplier:v.supplier||j.supplier||'',stores:j.stores||v.stores||[],lines:lines,expires:exp,status:st,submitted:isSub,expired:expired,at:(sub&&sub.at)||v.repliedAt||''}}
+function groups(){var g={},o=[];S.d.lines.forEach(function(l){if(!g[l.store]){g[l.store]=[];o.push(l.store)}g[l.store].push(l)});return o.map(function(s){return {store:s,lines:g[s]}})}
+function tot(){var sup=0,n=0,b=0,ch=0;S.d.lines.forEach(function(l){var e=S.ed[l.lineId];if(!e)return;if(!e.soldOut){sup+=(e.price||0)*(e.qty||0);n++;b+=(e.qty||0)}if(e.soldOut||e.price!==l.our||e.qty!==l.qty)ch++});var vat=Math.round(sup*0.1);return {sup:sup,vat:vat,total:sup+vat,n:n,b:b,ch:ch}}
+function lineHTML(l,ro){var e=S.ed[l.lineId];var d=e.price!=null&&l.our!=null?e.price-l.our:0;var chg=e.soldOut||d!==0||e.qty!==l.qty;var id=E(l.lineId);
+ return '<div class="ln'+(chg?' chg':'')+(e.soldOut?' so':'')+'" id="ln_'+id+'"><div class="nm">'+E(l.name)+'</div><div class="ours">탭샵바 기준 단가 '+W(l.our)+'원 · 주문 '+l.qty+'</div>'+
+ '<div class="grid"><div class="f"><label>지금 출고 단가 (VAT 별도)</label><input class="in" inputmode="numeric" data-id="'+id+'" data-f="price" value="'+(e.price==null?'':W(e.price))+'" '+(ro||e.soldOut?'disabled':'')+'></div>'+
+ '<div class="f"><label>수량</label><div class="qty'+(ro||e.soldOut?' dis':'')+'"><button type="button" data-id="'+id+'" data-q="-1" '+(ro||e.soldOut?'disabled':'')+' aria-label="빼기">-</button><input inputmode="numeric" data-id="'+id+'" data-f="qty" value="'+(e.qty==null?'':(ro&&e.soldOut?0:e.qty))+'" '+(ro||e.soldOut?'disabled':'')+'><button type="button" data-id="'+id+'" data-q="1" '+(ro||e.soldOut?'disabled':'')+' aria-label="더하기">+</button></div></div></div>'+
+ '<div class="row2"><label class="chk"><input type="checkbox" data-id="'+id+'" data-f="soldOut" '+(e.soldOut?'checked':'')+' '+(ro?'disabled':'')+'>품절</label><span>'+(d&&!e.soldOut?'<span class="diff '+(d>0?'up':'dn')+'">'+(d>0?'+':'')+W(d)+'원</span> ':'')+'<span class="amt" id="amt_'+id+'">'+(e.soldOut?'품절':W((e.price||0)*(e.qty||0))+'원')+'</span></span></div>'+
+ ((e.soldOut||e.alt)?'<div class="alt f"><label>대체품 (있으면 이름·단가)</label><input class="in t" data-id="'+id+'" data-f="alt" value="'+E(e.alt)+'" placeholder="예: 같은 와인 2023 빈티지 / 단가" '+(ro?'disabled':'')+'></div>':'')+'</div>'}
+function draw(){var d=S.d,gs=groups();var exp=d.expires?D(d.expires):'';
+ page('<div class="card"><h1>'+E(d.supplier)+' 발주 단가 확인</h1><div class="sub">탭샵바 '+E(gs.map(function(g){return g.store}).join(' · '))+' 발주예요. 지금 출고 단가와 수량만 확인해 주세요. 그대로면 수정 없이 제출하시면 돼요.</div>'+
+ '<div class="meta"><span>품목 <b>'+d.lines.length+'</b></span><span>수량 <b>'+d.lines.reduce(function(a,l){return a+l.qty},0)+'</b></span>'+(exp?'<span>'+exp+'까지 열려요</span>':'')+'</div>'+
+ '<ul class="how"><li>단가는 부가세 별도 금액이에요. 바뀐 줄은 파란색으로 표시돼요.</li><li>없는 품목은 품절을 체크하고, 대체품이 있으면 적어 주세요.</li><li>제출하면 확정된 단가로 입금 진행돼요. 제출 뒤에는 수정할 수 없어요.</li></ul>'+
+ '<div class="tools noprint" style="margin-top:12px"><button class="btn sm" type="button" onclick="VP.print()">인쇄</button><button class="btn sm" type="button" onclick="VP.csv()">엑셀 다운로드</button></div></div>'+
+ '<div class="lnlist">'+gs.map(function(g){return '<div class="card"><div class="store"><h2>'+E(g.store)+'</h2><span>'+g.lines.length+'품목 · 수량 '+g.lines.reduce(function(a,l){return a+l.qty},0)+'</span></div>'+g.lines.map(function(l){return lineHTML(l,false)}).join('')+'</div>'}).join('')+'</div>'+
+ ptable()+
+ '<div class="card noprint"><div class="f"><label>출고 가능일</label><input class="in t" type="date" id="v_ship" value="'+E(S.ship)+'"></div><div class="f" style="margin-top:12px"><label>메모 (선택)</label><textarea class="in t" id="v_memo" rows="3" style="resize:vertical" placeholder="전달할 내용이 있으면 적어 주세요">'+E(S.memo)+'</textarea></div></div>'+
+ '<div class="foot">문의: 탭샵바 서포트센터 '+CONTACT+'</div>');
+ bar()}
+function ptable(){var d=S.d,t=tot();return '<table class="ptable"><thead><tr><th>지점</th><th>품목</th><th>탭샵바 단가</th><th>출고 단가</th><th>수량</th><th>공급가</th><th>품절·대체품</th></tr></thead><tbody>'+d.lines.map(function(l){var e=S.ed[l.lineId];return '<tr><td>'+E(l.store)+'</td><td>'+E(l.name)+'</td><td class="n">'+W(l.our)+'</td><td class="n">'+(e.soldOut?'-':W(e.price))+'</td><td class="n">'+(e.soldOut?0:e.qty)+'</td><td class="n">'+(e.soldOut?0:W((e.price||0)*(e.qty||0)))+'</td><td>'+(e.soldOut?'품절':'')+(e.alt?' '+E(e.alt):'')+'</td></tr>'}).join('')+'<tr><td colspan="5">공급가 / 부가세 / 합계</td><td class="n" colspan="2">'+W(t.sup)+' / '+W(t.vat)+' / '+W(t.total)+'원</td></tr></tbody></table>'}
+function bar(){var t=tot();totEl.innerHTML='<div class="tot"><div class="in2"><div class="nums">공급가 '+W(t.sup)+' · 부가세 '+W(t.vat)+'<b>합계 '+W(t.total)+'원</b></div><button class="btn p" id="v_go" type="button" onclick="VP.review()">제출하기</button></div></div>'}
+function upd(id){var l=S.d.lines.find(function(x){return String(x.lineId)===String(id)});var e=S.ed[l.lineId];var el=document.getElementById('ln_'+id);if(!el)return;
+ var d=e.price!=null&&l.our!=null?e.price-l.our:0;el.classList.toggle('chg',e.soldOut||d!==0||e.qty!==l.qty);
+ var a=document.getElementById('amt_'+id);if(a){a.textContent=e.soldOut?'품절':W((e.price||0)*(e.qty||0))+'원';var df=a.previousElementSibling;if(df&&df.classList.contains('diff'))df.remove();if(d&&!e.soldOut){var s=document.createElement('span');s.className='diff '+(d>0?'up':'dn');s.textContent=(d>0?'+':'')+W(d)+'원';a.parentNode.insertBefore(s,a);a.parentNode.insertBefore(document.createTextNode(' '),a)}}
+ var pt=app.querySelector('.ptable');if(pt)pt.outerHTML=ptable();bar()}
+app.addEventListener('input',function(ev){var t=ev.target,id=t.dataset.id,f=t.dataset.f;if(!id||!f||S.locked)return;var e=S.ed[id];
+ if(f==='price'){e.price=N(t.value);upd(id)}else if(f==='qty'){e.qty=N(t.value);if(e.qty!=null&&e.qty<0)e.qty=0;upd(id)}else if(f==='alt'){e.alt=t.value}});
+app.addEventListener('change',function(ev){var t=ev.target,id=t.dataset.id,f=t.dataset.f;if(t.id==='v_ship')S.ship=t.value;if(t.id==='v_memo')S.memo=t.value;if(!id||S.locked)return;var e=S.ed[id];
+ if(f==='soldOut'){e.soldOut=t.checked;var l=S.d.lines.find(function(x){return String(x.lineId)===String(id)});var el=document.getElementById('ln_'+id);el.outerHTML=lineHTML(l,false);upd(id)}
+ else if(f==='price'&&e.price!=null)t.value=W(e.price)});
+app.addEventListener('click',function(ev){var b=ev.target.closest('button[data-q]');if(!b||S.locked)return;var id=b.dataset.id,e=S.ed[id];e.qty=Math.max(0,(e.qty||0)+Number(b.dataset.q));var inp=b.parentNode.querySelector('input');inp.value=e.qty;upd(id)});
+app.addEventListener('input',function(ev){if(ev.target.id==='v_memo')S.memo=ev.target.value});
+var VP=window.VP={};
+VP.review=function(){var bad=S.d.lines.filter(function(l){var e=S.ed[l.lineId];return !e.soldOut&&(!e.price||e.price<=0||e.qty==null)});
+ if(bad.length){alert('단가 또는 수량이 비어 있는 품목이 '+bad.length+'개 있어요. 없는 품목은 품절을 체크해 주세요.');var el=document.getElementById('ln_'+bad[0].lineId);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});return}
+ var t=tot();var ch=S.d.lines.filter(function(l){var e=S.ed[l.lineId];return e.soldOut||e.price!==l.our||e.qty!==l.qty});
+ var m=document.createElement('div');m.className='mask';m.id='v_mask';
+ m.innerHTML='<div class="sheet"><h1 style="font-size:20px">이대로 제출할까요?</h1><div class="sub">제출하면 탭샵바 서포트센터로 바로 전달되고, 이 링크는 잠겨요.</div>'+
+ '<div class="chgl" style="margin:12px 0">'+(ch.length?'<div class="mute"><span>바뀐 품목 '+ch.length+'개</span><span></span></div>'+ch.map(function(l){var e=S.ed[l.lineId];return '<div><span>'+E(l.store)+' · '+E(l.name)+'</span><span>'+(e.soldOut?'품절'+(e.alt?' (대체품 있음)':''):(e.price!==l.our?W(l.our)+' → <b>'+W(e.price)+'</b>':'')+(e.qty!==l.qty?' 수량 '+l.qty+' → <b>'+e.qty+'</b>':''))+'</span></div>'}).join(''):'<div><span>모든 품목 기준 단가·수량 그대로</span><span></span></div>')+'</div>'+
+ '<table class="sum"><tr><td>공급가</td><td>'+W(t.sup)+'원</td></tr><tr><td>부가세</td><td>'+W(t.vat)+'원</td></tr><tr class="t"><td>합계</td><td>'+W(t.total)+'원</td></tr></table>'+
+ '<div class="meta"><span>출고 가능일 <b>'+(S.ship?D(S.ship):'미입력')+'</b></span></div>'+
+ '<div style="display:flex;gap:8px;margin-top:16px"><button class="btn" type="button" style="flex:1" onclick="document.getElementById(\'v_mask\').remove()">다시 보기</button><button class="btn p" type="button" style="flex:2" id="v_send" onclick="VP.send()">제출</button></div></div>';
+ document.body.appendChild(m)};
+VP.send=function(){var b=document.getElementById('v_send');if(b.disabled)return;b.disabled=true;b.textContent='보내는 중...';
+ var lines=S.d.lines.map(function(l){var e=S.ed[l.lineId];return {lineId:l.lineId,price:e.soldOut?null:e.price,qty:e.soldOut?0:e.qty,soldOut:!!e.soldOut,alt:e.alt||'',memo:e.memo||''}});
+ post('vendor.submit',{vpoId:VPO,t:TK,lines:lines,shipDate:S.ship||'',memo:S.memo||''}).then(function(j){S.locked=true;S.d.at=j.at||new Date().toISOString();var m=document.getElementById('v_mask');if(m)m.remove();done(false);window.scrollTo(0,0)}).catch(function(e){var c=String(e.code||'')+' '+e.message;
+  if(/USED|SUBMITTED|LOCK|제출/i.test(c)){var m=document.getElementById('v_mask');if(m)m.remove();return msg('이미 제출된 링크예요','이 발주는 제출이 끝났어요. 고칠 내용이 있으면 탭샵바 서포트센터로 연락해 주세요.','제출 완료')}
+  if(/EXPIRE|만료/i.test(c)){var m2=document.getElementById('v_mask');if(m2)m2.remove();return expired()}
+  b.disabled=false;b.textContent='제출';alert('보내지 못했어요. 잠시 뒤 다시 눌러 주세요. ('+e.message+')')})};
+function done(again){var d=S.d,t=tot();totEl.innerHTML='';
+ page('<div class="card"><div class="done">제출 완료</div><h1>'+E(d.supplier)+' 발주 회신을 받았어요</h1><div class="sub">'+(again?'이 링크는 이미 제출이 끝나 읽기 전용이에요. ':'감사합니다. ')+'탭샵바 서포트센터가 확인한 뒤 확정 금액으로 입금 진행해요. 고칠 내용이 있으면 '+CONTACT+'로 알려 주세요.</div>'+
+ '<table class="sum" style="margin-top:12px"><tr><td>공급가</td><td>'+W(t.sup)+'원</td></tr><tr><td>부가세</td><td>'+W(t.vat)+'원</td></tr><tr class="t"><td>합계</td><td>'+W(t.total)+'원</td></tr></table>'+
+ '<div class="meta"><span>출고 가능일 <b>'+(S.ship?D(S.ship):'미입력')+'</b></span>'+(S.memo?'<span>메모 '+E(S.memo)+'</span>':'')+'</div>'+
+ '<div class="tools noprint" style="margin-top:12px"><button class="btn sm" type="button" onclick="VP.print()">인쇄</button><button class="btn sm" type="button" onclick="VP.csv()">엑셀 다운로드</button></div></div>'+
+ '<div class="lnlist">'+groups().map(function(g){return '<div class="card"><div class="store"><h2>'+E(g.store)+'</h2><span>'+g.lines.length+'품목</span></div>'+g.lines.map(function(l){return lineHTML(l,true)}).join('')+'</div>'}).join('')+'</div>'+ptable()+
+ '<div class="foot">문의: 탭샵바 서포트센터 '+CONTACT+'</div>')}
+VP.print=function(){window.print()};
+VP.csv=function(){var d=S.d;var q=function(s){s=String(s==null?'':s);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
+ var rows=[['거래처','지점','품목','탭샵바 기준 단가','출고 단가','수량','공급가','품절','대체품']];
+ d.lines.forEach(function(l){var e=S.ed[l.lineId]||{};rows.push([d.supplier,l.store,l.name,l.our,e.soldOut?'':e.price,e.soldOut?0:e.qty,e.soldOut?0:(e.price||0)*(e.qty||0),e.soldOut?'Y':'',e.alt||''])});
+ var t=tot();rows.push([]);rows.push(['','','공급가','','','','',t.sup]);rows.push(['','','부가세','','','','',t.vat]);rows.push(['','','합계','','','','',t.total]);
+ if(S.ship)rows.push(['','','출고 가능일',S.ship]);
+ var csv='\ufeff'+rows.map(function(r){return r.map(q).join(',')}).join('\r\n');
+ var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='탭샵바_발주_'+(d.supplier||'')+'_'+(d.vpoId||'')+'.csv';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)};
+window.addEventListener('hashchange',function(){location.reload()});
+load();
+})();
+</script>
+</body>
+</html>
